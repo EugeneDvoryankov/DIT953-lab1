@@ -134,7 +134,7 @@ public abstract class Car implements Movable{
     }
 
     public void brake(double amount){
-        String s = "break";
+        String s = "brake";
         gasOrBreak(amount, s);
     }
 
