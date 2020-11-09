@@ -22,8 +22,16 @@ public abstract class Car implements Movable{
         return nrDoors;
     }
 
+    public void setNrDoors(int nrDoors) {
+        this.nrDoors = nrDoors;
+    }
+
     public double getEnginePower() {
         return enginePower;
+    }
+
+    public void setEnginePower(double enginePower) {
+        this.enginePower = enginePower;
     }
 
     public double getCurrentSpeed() {
@@ -43,6 +51,14 @@ public abstract class Car implements Movable{
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 
     public void startEngine(){
