@@ -1,13 +1,23 @@
 public class CarsMain {
     public static void main(String[] args){
-        Car volvo = new Volvo240(0,0);
+
+        Volvo240 volvo = new Volvo240();
         System.out.println(volvo);
-        volvo.startEngine();
+        volvo.setCurrentSpeed(90);
         System.out.println(volvo);
-        volvo.setCurrentSpeed(120); // 100
+        volvo.incrementSpeed(0.2); // 100
         System.out.println(volvo);
-        volvo.brake(1);
-        System.out.println(volvo);
+
+        System.out.println();
+
+        Saab95 saab = new Saab95();
+        System.out.println(saab);
+        saab.setCurrentSpeed(90);
+        System.out.println(saab);
+        saab.setTurboOn();
+        saab.incrementSpeed(1);
+        System.out.println(saab);
+
         /*
         saab.move();
         System.out.println(saab);

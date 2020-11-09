@@ -4,8 +4,7 @@ public class Saab95 extends Car{
 
     private boolean turboOn;
     
-    public Saab95(double x, double y){
-        super(x,y); // Call to Car's constructor
+    public Saab95(){
         setNrDoors(2);
         setColor(Color.red);
         setEnginePower(125);

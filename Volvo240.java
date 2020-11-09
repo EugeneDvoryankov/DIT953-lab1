@@ -4,8 +4,7 @@ public class Volvo240 extends Car{
 
     private final static double trimFactor = 1.25;
     
-    public Volvo240(double x, double y){
-        super(x,y); // Call to Car's constructorr
+    public Volvo240(){
         setNrDoors(4);
         setColor(Color.black);
         setEnginePower(100);

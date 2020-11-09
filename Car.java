@@ -18,11 +18,6 @@ public abstract class Car implements Movable{
         this.y = 0;
     }
 
-    public Car(double x, double y){
-        this.x = x;
-        this.y = y;
-    }
-
     public int getNrDoors() {
         return nrDoors;
     }
@@ -102,36 +97,44 @@ public abstract class Car implements Movable{
     public abstract double speedFactor();
 
     public void incrementSpeed(double amount){
-        double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
-        setCurrentSpeed(newSpeed);
+        if (amount > 0) {
+            double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
+            setCurrentSpeed(newSpeed);
+        }
     }
 
     public void decrementSpeed(double amount){
-        double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-        // 100 - 1.25 * 1 = 98.75
-        setCurrentSpeed(newSpeed);
+        if (amount > 0) {
+            double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+            setCurrentSpeed(newSpeed);
+        }
     }
 
     public void gas(double amount){
-        try {
-            if (amount < 0 || amount > 1) {
-                throw new IllegalArgumentException("gas() and brake() only accept values in the interval [0,1]");
-            }
-            incrementSpeed(amount);
-        } catch (IllegalArgumentException e){
-            e.printStackTrace();
-        }
-        //variabel increment eller decrement
+        String s = "gas";
+        gasOrBreak(amount, s);
     }
 
     public void brake(double amount){
+        String s = "break";
+        gasOrBreak(amount, s);
+    }
+
+    public void gasOrBreak(double amount, String s){
+
         try {
             if (amount < 0 || amount > 1) {
                 throw new IllegalArgumentException("gas() and brake() only accept values in the interval [0,1]");
             }
-            decrementSpeed(amount);
+            if (s.equals("gas")){
+                incrementSpeed(amount);
+            }
+            if (s.equals("brake")){
+                decrementSpeed(amount);
+            }
         } catch (IllegalArgumentException e){
             e.printStackTrace();
         }
     }
+
 }
