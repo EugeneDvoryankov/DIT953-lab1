@@ -140,7 +140,7 @@ public abstract class Car implements Movable{
 
     public void gasOrBreak(double amount, String s){
 
-        if (!(amount < 0 || amount > 1)) {
+        if (amount >= 0 || amount <= 1) {
             if (s.equals("gas")){
                 incrementSpeed(amount);
             }
