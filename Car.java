@@ -61,12 +61,30 @@ public abstract class Car implements Movable{
         this.modelName = modelName;
     }
 
+
+
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
     public void stopEngine(){
         currentSpeed = 0;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     @Override
