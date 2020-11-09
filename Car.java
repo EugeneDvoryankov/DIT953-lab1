@@ -140,18 +140,13 @@ public abstract class Car implements Movable{
 
     public void gasOrBreak(double amount, String s){
 
-        try {
-            if (amount < 0 || amount > 1) {
-                throw new IllegalArgumentException("gas() and brake() only accept values in the interval [0,1]");
-            }
+        if (!(amount < 0 || amount > 1)) {
             if (s.equals("gas")){
                 incrementSpeed(amount);
             }
             if (s.equals("brake")){
                 decrementSpeed(amount);
             }
-        } catch (IllegalArgumentException e){
-            e.printStackTrace();
         }
     }
 
