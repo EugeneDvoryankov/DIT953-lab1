@@ -107,21 +107,21 @@ public abstract class Car implements Movable{
         return "( x: " + x + ", y: "  + y + ", currentSpeed: " + currentSpeed + ", " + ")";
     }
 
-    /** The following 3 methods exist in both Saab95 and Volvo240
+    /** The following method exist in both Saab95 and Volvo240
      * but the the method bodies are different for methods in Saab95 and Volvo
-     * But because the methods names are the same we create abstract methods
+     * But because the method name is the same we create an abstract method
      * which then Saab95 and Volvo inherit and override
      */
     public abstract double speedFactor();
 
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
         if (amount > 0) {
             double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
             setCurrentSpeed(newSpeed);
         }
     }
 
-    public void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
         if (amount > 0) {
             double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
             setCurrentSpeed(newSpeed);
