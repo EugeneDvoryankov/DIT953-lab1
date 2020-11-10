@@ -4,7 +4,7 @@ import java.awt.*;
 
 
 public abstract class Car implements Movable{
-    /** In order to avoid duplication
+    /* In order to avoid duplication
     we created a Car class that will contain all the instance variables and methods
     that exist in both Saab95 and Volvo240 classes */
 
@@ -110,7 +110,7 @@ public abstract class Car implements Movable{
         return "( x: " + x + ", y: "  + y + ", currentSpeed: " + currentSpeed + ", " + ")";
     }
 
-    /** The following method exist in both Saab95 and Volvo240
+    /*The following method exist in both Saab95 and Volvo240
      * but the the method bodies are different for methods in Saab95 and Volvo
      * But because the method name is the same we create an abstract method
      * which then Saab95 and Volvo inherit and override
