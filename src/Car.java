@@ -1,4 +1,7 @@
+package src;
+
 import java.awt.*;
+
 
 public abstract class Car implements Movable{
     /** In order to avoid duplication
@@ -114,14 +117,14 @@ public abstract class Car implements Movable{
      */
     public abstract double speedFactor();
 
-    private void incrementSpeed(double amount){
+    public void incrementSpeed(double amount){
         if (amount > 0) {
             double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
             setCurrentSpeed(newSpeed);
         }
     }
 
-    private void decrementSpeed(double amount){
+    public void decrementSpeed(double amount){
         if (amount > 0) {
             double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
             setCurrentSpeed(newSpeed);
