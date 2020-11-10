@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public abstract class Car implements Movable{
-    /** In order to avoid duplication
+    /* In order to avoid duplication
     we created a Car class that will contain all the instance variables and methods
     that exist in both Saab95 and Volvo240 classes */
 
@@ -114,14 +114,14 @@ public abstract class Car implements Movable{
      */
     public abstract double speedFactor();
 
-    private void incrementSpeed(double amount){
+    public void incrementSpeed(double amount){
         if (amount > 0) {
             double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
             setCurrentSpeed(newSpeed);
         }
     }
 
-    private void decrementSpeed(double amount){
+    public void decrementSpeed(double amount){
         if (amount > 0) {
             double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
             setCurrentSpeed(newSpeed);

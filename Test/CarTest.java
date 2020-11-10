@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CarTest {
 
 
-
+    /** Volvo240 should have 4 doors */
     @Test
     void getNrDoors() {
         Volvo240 volvo240 = new Volvo240();
