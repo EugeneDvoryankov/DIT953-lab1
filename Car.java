@@ -129,24 +129,14 @@ public abstract class Car implements Movable{
     }
 
     public void gas(double amount){
-        String s = "gas";
-        gasOrBreak(amount, s);
+        if (amount >= 0 || amount <= 1) {
+           incrementSpeed(amount);
+        }
     }
 
     public void brake(double amount){
-        String s = "brake";
-        gasOrBreak(amount, s);
-    }
-
-    public void gasOrBreak(double amount, String s){
-
         if (amount >= 0 || amount <= 1) {
-            if (s.equals("gas")){
-                incrementSpeed(amount);
-            }
-            if (s.equals("brake")){
-                decrementSpeed(amount);
-            }
+            decrementSpeed(amount);
         }
     }
 
