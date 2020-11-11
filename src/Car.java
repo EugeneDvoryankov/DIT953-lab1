@@ -1,6 +1,18 @@
 import java.awt.*;
 
-
+/** Represents a base model of a car that all other car's are based on.
+ * It has the following attributes:
+ * The car's current x coordinate
+ * The car's current y coordinate
+ * The number of doors on the car
+ * The engine power of the car
+ * The current speed of the car
+ * The car's color
+ * The car's modelName.
+ * Has getters and setters for all attributes except setters for x and y coordinate.
+ * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
+ * for the purpose of increasing or decreasing the car's speed.
+ */
 public abstract class Car implements Movable{
     /* In order to avoid duplication
     we created a Car class that will contain all the instance variables and methods
@@ -134,17 +146,27 @@ public abstract class Car implements Movable{
         return y;
     }
 
-
+    /**
+     * Move the Car forwards.
+     *
+     */
     @Override
     public void move() {
         y = y + currentSpeed;
     }
 
-
+    /**
+     * Move the car to the left.
+     */
+    @Override
     public void turnLeft(){
         x = x - currentSpeed;
     }
 
+    /**
+     * Move the car to the right.
+     */
+    @Override
     public void turnRight(){
         x = x + currentSpeed;
     }
@@ -161,11 +183,19 @@ public abstract class Car implements Movable{
      */
     public abstract double speedFactor();
 
+    /** Increases the car's currentSpeed.
+     *
+     * @param amount a multiplier for how much the speed should increase, taken from gas.
+     */
     public void incrementSpeed(double amount){
             double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
             setCurrentSpeed(newSpeed);
     }
 
+    /** Decreases the car's currentSpeed.
+     *
+     * @param amount a multiplier for how much the speed should decrease, taken from brake.
+     */
     public void decrementSpeed(double amount){
             double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
             setCurrentSpeed(newSpeed);

@@ -2,9 +2,6 @@ import java.awt.*;
 
 /** Represents a Volvo car.
  *
- * @author Daniel Ericsson
- * @author Eugene Dvoryankokv
- * @author Victor Hui
  */
 public class Volvo240 extends Car{
 
