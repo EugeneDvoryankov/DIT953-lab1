@@ -156,7 +156,7 @@ public abstract class Car implements Movable{
     }
 
     /**
-     * Move the car to the left.
+     * Turn the car to the left.
      */
     @Override
     public void turnLeft(){
@@ -164,7 +164,7 @@ public abstract class Car implements Movable{
     }
 
     /**
-     * Move the car to the right.
+     * Turn the car to the right.
      */
     @Override
     public void turnRight(){
