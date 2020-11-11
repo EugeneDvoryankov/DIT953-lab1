@@ -75,7 +75,7 @@ public abstract class Car implements Movable{
      * Set the current speed (For testing purposes?)
      * @param currentSpeed the current speed wanted
      */
-    public void setCurrentSpeed(double currentSpeed) {
+    private void setCurrentSpeed(double currentSpeed) {
         //currentSpeed always lies in the interval [0,enginePower]
         if(currentSpeed >= 0) {
             this.currentSpeed = Math.min(currentSpeed, getEnginePower());
@@ -187,7 +187,7 @@ public abstract class Car implements Movable{
      *
      * @param amount a multiplier for how much the speed should increase, taken from gas.
      */
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
             double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
             setCurrentSpeed(newSpeed);
     }
@@ -196,7 +196,7 @@ public abstract class Car implements Movable{
      *
      * @param amount a multiplier for how much the speed should decrease, taken from brake.
      */
-    public void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
             double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
             setCurrentSpeed(newSpeed);
     }
