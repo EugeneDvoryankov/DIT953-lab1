@@ -116,27 +116,29 @@ public class CarTest {
         volvo240.gas(1);
         assertEquals(1.25, volvo240.getCurrentSpeed(), 0.001);
     }
-    /*@Test
+
+    @Test
     public void gasWrong() {
         Volvo240 volvo240 = new Volvo240();
-        volvo240.setCurrentSpeed(90);
+        volvo240.startEngine();
         volvo240.gas(-1);
-        assertEquals(90, volvo240.getCurrentSpeed(), 0.001);
+        assertEquals(0.1, volvo240.getCurrentSpeed(), 0.001);
     }
 
     @Test
     public void brakeCorrect() {
         Volvo240 volvo240 = new Volvo240();
-        volvo240.setCurrentSpeed(90);
+        volvo240.startEngine();
+        volvo240.gas(1);
         volvo240.brake(1);
-        assertEquals(88.75, volvo240.getCurrentSpeed(), 0.001);
+        assertEquals(0.1, volvo240.getCurrentSpeed(), 0.001);
     }
 
     @Test
     public void brakeWrong(){
         Volvo240 volvo240 = new Volvo240();
-        volvo240.setCurrentSpeed(90);
+        volvo240.gas(1);
         volvo240.brake(-1);
-        assertEquals(90, volvo240.getCurrentSpeed(), 0.001);
-    }*/
+        assertEquals(1.25, volvo240.getCurrentSpeed(), 0.001);
+    }
 }
