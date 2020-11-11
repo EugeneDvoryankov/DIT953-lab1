@@ -17,6 +17,7 @@ public class Saab95 extends Car {
         setEnginePower(125);
         turboOn = false;
         setModelName("Saab95");
+
         stopEngine();
     }
 
