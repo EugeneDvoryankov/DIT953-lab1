@@ -19,26 +19,50 @@ public abstract class Car implements Movable{
         this.y = 0;
     }
 
+    /**
+     * Get the number of doors
+     * @return the number of doors
+     */
     public int getNrDoors() {
         return nrDoors;
     }
 
+    /**
+     * Set the number of doors (For testing purposes?)
+     * @param nrDoors The number of doors wanted
+     */
     public void setNrDoors(int nrDoors) {
         this.nrDoors = nrDoors;
     }
 
+    /**
+     * Get the engine power
+     * @return the engine power
+     */
     public double getEnginePower() {
         return enginePower;
     }
 
+    /**
+     * Set the engine power (For testing purposes?)
+     * @param enginePower the engine power wanted
+     */
     public void setEnginePower(double enginePower) {
         this.enginePower = enginePower;
     }
 
+    /**
+     * Get the current speed
+     * @return current speed
+     */
     public double getCurrentSpeed() {
         return currentSpeed;
     }
 
+    /**
+     * Set the current speed (For testing purposes?)
+     * @param currentSpeed the current speed wanted
+     */
     public void setCurrentSpeed(double currentSpeed) {
         //currentSpeed always lies in the interval [0,enginePower]
         if(currentSpeed >= 0) {
@@ -46,37 +70,66 @@ public abstract class Car implements Movable{
         }
     }
 
+    /**
+     * Get the color of the car
+     * @return the color
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Set the color (For testing purposes)
+     * @param color The color wanted
+     */
     public void setColor(Color color) {
         this.color = color;
     }
 
+    /**
+     * Get the model name
+     * @return model name
+     */
     public String getModelName() {
         return modelName;
     }
 
+    /**
+     * Set the model name (For testing purposes?)
+     * @param modelName The model name wanted
+     */
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
 
 
-
+    /**
+     * Start the engine
+     */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
+    /**
+     * Stop the engine
+     */
     public void stopEngine(){
         currentSpeed = 0;
     }
 
+    /**
+     * Get the X coordinate (For testing purposes)
+     * @return the X coordinate of the car
+     */
     public double getX() {
         return x;
     }
 
 
+    /**
+     * Get the Y coordinate (For testing purposes)
+     * @return the Y coordinate of the car
+     */
     public double getY() {
         return y;
     }
@@ -87,12 +140,11 @@ public abstract class Car implements Movable{
         y = y + currentSpeed;
     }
 
-    @Override
+
     public void turnLeft(){
         x = x - currentSpeed;
     }
 
-    @Override
     public void turnRight(){
         x = x + currentSpeed;
     }
@@ -119,12 +171,22 @@ public abstract class Car implements Movable{
             setCurrentSpeed(newSpeed);
     }
 
+    /**
+     * Gas the car.
+     * Takes a number between 1 and 0.
+     * @param amount how hard you press the gas
+     */
     public void gas(double amount){
         if (amount >= 0 & amount <= 1) {
            incrementSpeed(amount);
         }
     }
 
+    /**
+     * Brake the car.
+     * Takes a number between 1 and 0.
+     * @param amount how hard you press the brakes
+     */
     public void brake(double amount){
         if (amount >= 0 & amount <= 1) {
             decrementSpeed(amount);
