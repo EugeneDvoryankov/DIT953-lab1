@@ -1,13 +1,16 @@
 import java.awt.*;
 
-/** Represents a Volvo car.
- *
+/** Represents a Volvo240 car.
+ * It has the following attributes:
+ * a final static double representing the trimFactor
+ * The class also have following methods:
+ * speedFactor()
  */
 public class Volvo240 extends Car{
 
     private final static double trimFactor = 1.25;
 
-    /** Class constructor for Volvo240 specifying nrDoors, color, enginePower, modelName as well as turning engine off.
+    /** Class constructor for Volvo240 specifying nrDoors, color, enginePower, modelName as well as making a call to stopEngine().
      */
     public Volvo240(){
         setNrDoors(4);

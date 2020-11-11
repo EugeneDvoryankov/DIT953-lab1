@@ -1,7 +1,11 @@
 import java.awt.*;
 
 /**
- * Represents a Saab95 car
+ * Represents a Saab95 car.
+ * It has the following attributes:
+ * A boolean representing that Saab95's turbo is On or Off.
+ * The class also have following methods:
+ * setTurboOn(), setTurboOff(), isTurboOn() and speedFactor()
  */
 public class Saab95 extends Car {
 
