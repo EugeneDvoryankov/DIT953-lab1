@@ -11,11 +11,6 @@ public class Saab95 extends Car {
 
     private boolean turboOn;
 
-    /**
-     * Creates a Saab.
-     * with specified nrDoors, color, enginePower, set turboOn to false
-     * specifies modelName and makes a call to stopEngine method.
-     */
     public Saab95(){
         setNrDoors(2);
         setColor(Color.red);
