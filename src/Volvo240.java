@@ -1,7 +1,10 @@
 import java.awt.*;
 
-/** Represents a Volvo car.
- *
+/** Represents a Volvo240 car.
+ * It has the following attributes:
+ * a final static double representing the trimFactor
+ * The class also have following methods:
+ * speedFactor()
  */
 public class Volvo240 extends Car{
 
