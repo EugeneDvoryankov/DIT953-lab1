@@ -10,8 +10,6 @@ public class Volvo240 extends Car{
 
     private final static double trimFactor = 1.25;
 
-    /** Class constructor for Volvo240 specifying nrDoors, color, enginePower, modelName as well as making a call to stopEngine().
-     */
     public Volvo240(){
         setNrDoors(4);
         setColor(Color.black);
