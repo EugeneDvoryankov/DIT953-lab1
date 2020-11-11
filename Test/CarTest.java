@@ -1,95 +1,93 @@
+import org.junit.Test;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 public class CarTest {
 
-
     /** Volvo240 should have 4 doors */
     @Test
-    void getNrDoors() {
+    public void getNrDoors() {
         Volvo240 volvo240 = new Volvo240();
         assertEquals(4, volvo240.getNrDoors());
     }
 
     @Test
-    void setNrDoors() {
+    public void setNrDoors() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setNrDoors(2);
         assertEquals(2, volvo240.getNrDoors());
     }
 
     @Test
-    void getEnginePower() {
+    public void getEnginePower() {
         Volvo240 volvo240 = new Volvo240();
-        assertEquals(100, volvo240.getEnginePower());
+        assertEquals(100, volvo240.getEnginePower(), 0.001);
     }
 
     @Test
-    void setEnginePower() {
+    public void setEnginePower() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setEnginePower(200);
         assertEquals(200, volvo240.getEnginePower(), 0.001);
     }
 
     @Test
-    void getCurrentSpeed() {
+    public void getCurrentSpeed() {
         Volvo240 volvo240 = new Volvo240();
-        assertEquals(0, volvo240.getCurrentSpeed());
+        assertEquals(0, volvo240.getCurrentSpeed(), 0.001);
     }
 
     @Test
-    void setCurrentSpeedCorrect() {
+    public void setCurrentSpeedCorrect() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(100);
-        assertEquals(100, volvo240.getCurrentSpeed());
+        assertEquals(100, volvo240.getCurrentSpeed(),0.001);
     }
 
     @Test
-    void setCurrentSpeedWrong() {
+    public void setCurrentSpeedWrong() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(150);
-        assertEquals(100, volvo240.getCurrentSpeed());
+        assertEquals(100, volvo240.getCurrentSpeed(),0.001);
     }
 
     @Test
-    void getColor() {
+    public void getColor() {
         Volvo240 volvo240 = new Volvo240();
         assertEquals(Color.black, volvo240.getColor());
     }
 
     @Test
-    void setColor() {
+    public void setColor() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setColor(Color.blue);
         assertEquals(Color.blue, volvo240.getColor());
     }
 
     @Test
-    void getModelName() {
+    public void getModelName() {
         Volvo240 volvo240 = new Volvo240();
         assertEquals("Volvo240", volvo240.getModelName());
     }
 
     @Test
-    void setModelName() {
+    public void setModelName() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setModelName("Volvo740");
         assertEquals("Volvo740", volvo240.getModelName());
     }
 
     @Test
-    void startEngine() {
+    public void startEngine() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.startEngine();
         assertEquals(0.1, volvo240.getCurrentSpeed(), 0.001);
     }
 
     @Test
-    void stopEngine() {
+    public void stopEngine() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.startEngine();
         volvo240.stopEngine();
@@ -97,7 +95,7 @@ public class CarTest {
     }
 
     @Test
-    void move() {
+    public void move() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.startEngine();
         volvo240.move();
@@ -105,7 +103,7 @@ public class CarTest {
     }
 
     @Test
-    void turnLeft() {
+    public void turnLeft() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.startEngine();
         volvo240.turnLeft();
@@ -113,7 +111,7 @@ public class CarTest {
     }
 
     @Test
-    void turnRight() {
+    public void turnRight() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.startEngine();
         volvo240.turnRight();
@@ -121,13 +119,13 @@ public class CarTest {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
         Volvo240 volvo240 = new Volvo240();
         assertEquals("( x: " + volvo240.getX() + ", y: "  + volvo240.getY() + ", currentSpeed: " + volvo240.getCurrentSpeed() + ", " + ")", volvo240.toString());
     }
 
     @Test
-    void incrementSpeed() {
+    public void incrementSpeed() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(90);
         volvo240.incrementSpeed(1);
@@ -135,7 +133,7 @@ public class CarTest {
     }
 
     @Test
-    void decrementSpeed() {
+    public void decrementSpeed() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(90);
         volvo240.decrementSpeed(1);
@@ -144,14 +142,14 @@ public class CarTest {
     }
 
     @Test
-    void gasCorrect() {
+    public void gasCorrect() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(90);
         volvo240.gas(1);
         assertEquals(91.25, volvo240.getCurrentSpeed(), 0.001);
     }
     @Test
-    void gasWrong() {
+    public void gasWrong() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(90);
         volvo240.gas(-1);
@@ -159,7 +157,7 @@ public class CarTest {
     }
 
     @Test
-    void brakeCorrect() {
+    public void brakeCorrect() {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(90);
         volvo240.brake(1);
@@ -167,7 +165,7 @@ public class CarTest {
     }
 
     @Test
-    void brakeWrong(){
+    public void brakeWrong(){
         Volvo240 volvo240 = new Volvo240();
         volvo240.setCurrentSpeed(90);
         volvo240.brake(-1);
