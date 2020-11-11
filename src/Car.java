@@ -2,12 +2,12 @@ import java.awt.*;
 
 /** Represents a base model of a car that all other car's are based on.
  * It has the following attributes:
- * The car's current x coordinate
- * The car's current y coordinate
- * The number of doors on the car
- * The engine power of the car
- * The current speed of the car
- * The car's color
+ * The car's current x coordinate,
+ * The car's current y coordinate,
+ * The number of doors on the car,
+ * The engine power of the car,
+ * The current speed of the car,
+ * The car's color,
  * The car's modelName.
  * Has getters and setters for all attributes except setters for x and y coordinate.
  * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
