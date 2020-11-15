@@ -204,6 +204,7 @@ public abstract class Car implements Movable{
 
     /**
      * Gas the car.
+     *
      * Takes a number between 1 and 0.
      * @param amount how hard you press the gas
      */
