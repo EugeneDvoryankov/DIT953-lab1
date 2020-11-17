@@ -2,18 +2,18 @@ import java.awt.*;
 
 /** Represents a base model of a car that all other car's are based on.
  * It has the following attributes:
- * The car's current x coordinate,
- * The car's current y coordinate,
- * The number of doors on the car,
- * The engine power of the car,
- * The current speed of the car,
- * The car's color,
+ * The car's current x coordinate
+ * The car's current y coordinate
+ * The number of doors on the car
+ * The engine power of the car
+ * The current speed of the car
+ * The car's color
  * The car's modelName.
  * Has getters and setters for all attributes except setters for x and y coordinate.
  * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
  * for the purpose of increasing or decreasing the car's speed.
  */
-public abstract class Car implements Movable{
+public abstract class Vehicle implements Movable{
     /* In order to avoid duplication
     we created a Car class that will contain all the instance variables and methods
     that exist in both Saab95 and Volvo240 classes */
@@ -26,7 +26,7 @@ public abstract class Car implements Movable{
     private Color color; // Color of the car
     private String modelName; // The car model name
 
-    public Car(){
+    public Vehicle(){
         this.x = 0;
         this.y = 0;
     }
@@ -119,14 +119,14 @@ public abstract class Car implements Movable{
      * Start the engine
      */
     public void startEngine(){
-        currentSpeed = 0.1;
+        setCurrentSpeed(0.1);
     }
 
     /**
      * Stop the engine
      */
     public void stopEngine(){
-        currentSpeed = 0;
+        setCurrentSpeed(0);
     }
 
     /**
@@ -152,7 +152,7 @@ public abstract class Car implements Movable{
      */
     @Override
     public void move() {
-        y = y + currentSpeed;
+        y = y + getCurrentSpeed();
     }
 
     /**
@@ -160,7 +160,7 @@ public abstract class Car implements Movable{
      */
     @Override
     public void turnLeft(){
-        x = x - currentSpeed;
+        x = x - getCurrentSpeed();
     }
 
     /**
@@ -168,12 +168,12 @@ public abstract class Car implements Movable{
      */
     @Override
     public void turnRight(){
-        x = x + currentSpeed;
+        x = x + getCurrentSpeed();
     }
 
     @Override
     public String toString(){
-        return "( x: " + x + ", y: "  + y + ", currentSpeed: " + currentSpeed + ", " + ")";
+        return "( x: " + getX() + ", y: "  + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
     }
 
     /*The following method exist in both Saab95 and Volvo240
@@ -181,15 +181,16 @@ public abstract class Car implements Movable{
      * But because the method name is the same we create an abstract method
      * which then Saab95 and Volvo inherit and override
      */
+
     public abstract double speedFactor();
 
     /** Increases the car's currentSpeed.
      *
      * @param amount a multiplier for how much the speed should increase, taken from gas.
      */
-    private void incrementSpeed(double amount){
-            double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
-            setCurrentSpeed(newSpeed);
+    public void incrementSpeed(double amount){
+        double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
+        setCurrentSpeed(newSpeed);
     }
 
     /** Decreases the car's currentSpeed.
@@ -197,18 +198,19 @@ public abstract class Car implements Movable{
      * @param amount a multiplier for how much the speed should decrease, taken from brake.
      */
     private void decrementSpeed(double amount){
-            double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-            setCurrentSpeed(newSpeed);
+        double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+        setCurrentSpeed(newSpeed);
     }
 
     /**
      * Gas the car.
+     *
      * Takes a number between 1 and 0.
      * @param amount how hard you press the gas
      */
     public void gas(double amount){
         if (amount >= 0 & amount <= 1) {
-           incrementSpeed(amount);
+            incrementSpeed(amount);
         }
     }
 
