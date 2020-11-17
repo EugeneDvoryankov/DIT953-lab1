@@ -119,14 +119,14 @@ public abstract class Car implements Movable{
      * Start the engine
      */
     public void startEngine(){
-        currentSpeed = 0.1;
+        setCurrentSpeed(0.1);
     }
 
     /**
      * Stop the engine
      */
     public void stopEngine(){
-        currentSpeed = 0;
+        setCurrentSpeed(0);
     }
 
     /**
@@ -152,7 +152,7 @@ public abstract class Car implements Movable{
      */
     @Override
     public void move() {
-        y = y + currentSpeed;
+        y = y + getCurrentSpeed();
     }
 
     /**
@@ -160,7 +160,7 @@ public abstract class Car implements Movable{
      */
     @Override
     public void turnLeft(){
-        x = x - currentSpeed;
+        x = x - getCurrentSpeed();
     }
 
     /**
@@ -168,12 +168,12 @@ public abstract class Car implements Movable{
      */
     @Override
     public void turnRight(){
-        x = x + currentSpeed;
+        x = x + getCurrentSpeed();
     }
 
     @Override
     public String toString(){
-        return "( x: " + x + ", y: "  + y + ", currentSpeed: " + currentSpeed + ", " + ")";
+        return "( x: " + getX() + ", y: "  + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
     }
 
     /*The following method exist in both Saab95 and Volvo240
@@ -181,13 +181,14 @@ public abstract class Car implements Movable{
      * But because the method name is the same we create an abstract method
      * which then Saab95 and Volvo inherit and override
      */
+
     public abstract double speedFactor();
 
     /** Increases the car's currentSpeed.
      *
      * @param amount a multiplier for how much the speed should increase, taken from gas.
      */
-    private void incrementSpeed(double amount){
+    public void incrementSpeed(double amount){
             double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
             setCurrentSpeed(newSpeed);
     }
@@ -196,13 +197,14 @@ public abstract class Car implements Movable{
      *
      * @param amount a multiplier for how much the speed should decrease, taken from brake.
      */
-    private void decrementSpeed(double amount){
+    public void decrementSpeed(double amount){
             double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
             setCurrentSpeed(newSpeed);
     }
 
     /**
      * Gas the car.
+     *
      * Takes a number between 1 and 0.
      * @param amount how hard you press the gas
      */
