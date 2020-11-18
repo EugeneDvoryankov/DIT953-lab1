@@ -23,17 +23,14 @@ public class CarRepairShop<C extends Car> {
 
     /** Removes a car from the Car Repair Shop
      *
-     * @param item a car
      */
-    public void removeCar(C item){
+    public void removeCar(){
         cars.pop();
     }
 
     /** Sees the next car in the Car Repair Shop
-     *
-     * @param item a car
      */
-    public void peekCar(C item){
+    public void peekCar(){
         cars.peek();
     }
 
