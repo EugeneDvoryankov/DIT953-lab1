@@ -51,12 +51,17 @@ public class CarTransporter<T extends Car> extends Vehicle{
         return rampUp;
     }
 
+    public boolean isCarCloseEnough(Car c) {
+        return  (getX()-5 < c.getX() & c.getX()<getX() + 5) & (getY()-5 < c.getY() & c.getY() <getY());
+    }
+
     /** Adds a car to the carTransporter's ramp
      *
      * Cars can only be loaded if: the carTransporter is stationary
      * ramp is down, and the cars are reasonably close to car
      * @param item a Car
      */
+
     public void loadCar(T item){
         if(canLoadCar(item)) {
             cars.push(item);
@@ -85,7 +90,7 @@ public class CarTransporter<T extends Car> extends Vehicle{
     public boolean canLoadCar(T item){
         if(getCurrentSpeed() == 0) {
             if (!rampUp) {
-                if (isCarCloseEnough) {
+                if (isCarCloseEnough(item)) {
                     return true;
                 }
             }
@@ -102,7 +107,7 @@ public class CarTransporter<T extends Car> extends Vehicle{
     public boolean canRemoveCar(T item){
         if(getCurrentSpeed() == 0) {
             if (!rampUp) {
-                if (isCarCloseEnough) {
+                if (isCarCloseEnough(item)) {
                     return true;
                 }
             }
