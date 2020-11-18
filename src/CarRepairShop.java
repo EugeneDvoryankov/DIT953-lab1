@@ -15,8 +15,6 @@ public class CarRepairShop<C extends Car> {
 
     /** Adds a car to the Car Repair Shop
      *
-     * Cars can only be loaded if: the carTransporter is stationary
-     * ramp is down, and the cars are reasonably close to car
      * @param item a Car
      */
     public void loadCar(C item){
@@ -25,12 +23,18 @@ public class CarRepairShop<C extends Car> {
 
     /** Removes a car from the Car Repair Shop
      *
-     * Cars can only be removed if: the carTransporter is stationary
-     * ramp is down, and the cars are reasonably close to car
      * @param item a car
      */
     public void removeCar(C item){
         cars.pop();
+    }
+
+    /** Sees the next car in the Car Repair Shop
+     *
+     * @param item a car
+     */
+    public void peekCar(C item){
+        cars.peek();
     }
 
     public static void main(String[] args) {
