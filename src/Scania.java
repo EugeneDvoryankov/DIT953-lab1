@@ -99,9 +99,7 @@ public class Scania extends Truck{
     @Override
     public void gas(double amount) {
         if(!isPlatformRaised()) {
-            if (amount >= 0 & amount <= 1) {
-                incrementSpeed(amount);
-            }
+            super.gas(amount);
         }
     }
 
