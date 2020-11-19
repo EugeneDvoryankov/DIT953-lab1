@@ -118,6 +118,9 @@ public class CarTest {
         volvo240.gas(1);
         assertEquals(1.25, volvo240.getCurrentSpeed(), 0.001);
     }
+
+
+
     /*@Test
     public void gasWrong() {
         Volvo240 volvo240 = new Volvo240();
