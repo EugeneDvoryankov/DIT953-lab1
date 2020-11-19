@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CarTransporter extends Vehicle {
+public class CarTransporter extends Truck {
     private boolean rampUp;
     private int maxSize; // the max number of cars that the CarTransporter can hold.
     private final List<Car> cars;
@@ -147,23 +147,6 @@ public class CarTransporter extends Vehicle {
      */
     @Override
     public double speedFactor() { return getEnginePower() * 0.01; }
-
-    /**
-     * Gas the carTransporter.
-     * <p>
-     * If the ramp is down then the carTransporter will not gas.
-     * Takes a number between 1 and 0.
-     *
-     * @param amount how hard you press the gas
-     */
-    @Override
-    public void gas(double amount) {
-        if(isRampRaised()) {
-            if (amount >= 0 & amount <= 1) {
-                incrementSpeed(amount);
-            }
-        }
-    }
 
     /**
      * Helper method for testing.
