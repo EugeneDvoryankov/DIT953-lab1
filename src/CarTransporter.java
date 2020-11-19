@@ -89,7 +89,6 @@ public class CarTransporter extends Vehicle {
     public void unloadCar() {
         if (canUnloadCar()) {
             cars.get(lastLoadedIndex()).setX(getX() + 5);
-            cars.get(lastLoadedIndex()).setX(getY());
             cars.remove(lastLoadedIndex());
         }
     }
