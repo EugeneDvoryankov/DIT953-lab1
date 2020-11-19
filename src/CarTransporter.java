@@ -1,4 +1,5 @@
 import java.awt.*;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -35,14 +36,15 @@ public class CarTransporter extends Vehicle {
     /**
      * Sets the carTransporter's ramp up
      */
-    public void setRampUp() {
+
+    public void raiseRamp(){
         rampUp = true;
     }
 
     /**
      * Sets the carTransporter's ramp down
      */
-    public void setRampDown() {
+    public void lowerRamp(){
         rampUp = false;
     }
 
@@ -51,7 +53,7 @@ public class CarTransporter extends Vehicle {
      *
      * @return a boolean representing if ramp is up or down
      */
-    public boolean isRampUp() {
+    public boolean isRampRaised(){
         return rampUp;
     }
 
@@ -59,9 +61,18 @@ public class CarTransporter extends Vehicle {
         return (getX() - 5 < c.getX() && c.getX() < getX() + 5) && (getY() - 5 < c.getY() && c.getY() < getY() + 5);
     }
 
-    /**
-     * Adds a car to the carTransporter's ramp
-     * <p>
+    /** Determines whether the truck is in motion;
+     * @return true if getCurrentSpeed() is equal to 0,
+     * otherwise returns false
+     */
+    public boolean isStationary() {
+        if(getCurrentSpeed() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    /** Adds a car to the carTransporter's ramp
      * Cars can only be loaded if: the carTransporter is stationary
      * ramp is down, and the cars are reasonably close to car
      *
@@ -132,7 +143,6 @@ public class CarTransporter extends Vehicle {
         return getEnginePower() * 0.01;
     }
 
-
     /**
      * Gas the carTransporter.
      * <p>
@@ -143,7 +153,8 @@ public class CarTransporter extends Vehicle {
      */
     @Override
     public void gas(double amount) {
-        if (isRampUp()) {
+
+        if(isRampRaised()) {
             if (amount >= 0 & amount <= 1) {
                 incrementSpeed(amount);
             }
