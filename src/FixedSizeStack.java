@@ -1,30 +1,36 @@
 import java.util.Stack;
 
 public class FixedSizeStack<T> {
-    private Stack<T> stack;
+    private Stack<T> stack = new Stack<>();
     private int maxSize;
-    private int currentSize;
+    private int currentSize = 0;
 
     public FixedSizeStack(int maxSize) {
         this.maxSize = maxSize;
     }
 
-    public T push(T item){
+    public void push(T item){
         if(currentSize < maxSize){
             stack.push(item);
             currentSize++;
         }
-        return item;
     }
 
-    public T pop(T item){
-        stack.pop();
-        return item;
+    public T pop(){
+        currentSize--;
+        return stack.pop();
     }
 
-    public T peek(T item){
-        stack.peek();
-        return item;
+    public T peek(){
+        return stack.peek();
     }
 
+    @Override
+    public String toString() {
+        return "FixedSizeStack{" +
+                "stack=" + stack +
+                ", maxSize=" + maxSize +
+                ", currentSize=" + currentSize +
+                '}';
+    }
 }

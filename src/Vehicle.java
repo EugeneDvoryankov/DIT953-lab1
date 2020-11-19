@@ -1,5 +1,7 @@
 import java.awt.*;
 
+import static java.lang.Math.*;
+
 /** Represents a base model of a car that all other car's are based on.
  * It has the following attributes:
  * The car's current x coordinate
@@ -25,10 +27,18 @@ public abstract class Vehicle implements Movable{
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
+    private int directionAngle;
 
-    public Vehicle(){
-        this.x = 0;
-        this.y = 0;
+    public Vehicle(double x, double y, int nrDoors, double enginePower, double currentSpeed,
+                   Color color, String modelName, int directionAngle){
+        this.x = x;
+        this.y = y;
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+        this.directionAngle = directionAngle;
     }
 
     public Vehicle(int i, int i1, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int i2) {
@@ -149,29 +159,49 @@ public abstract class Vehicle implements Movable{
         return y;
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     /**
      * Move the Car forwards.
      *
      */
     @Override
     public void move() {
-        y = y + getCurrentSpeed();
+        double angleInRadian = directionAngle *(Math.PI/180);
+        x = sin(angleInRadian) * getCurrentSpeed();
+        y = cos(angleInRadian) * getCurrentSpeed();
     }
 
     /**
      * Turn the car to the left.
+     * @param angle the amount of degrees you want the vehicle to turn left
      */
     @Override
-    public void turnLeft(){
-        x = x - getCurrentSpeed();
+    public void turnLeft(int angle){
+        setDirectionAngle(directionAngle - angle);
     }
 
     /**
      * Turn the car to the right.
+     * @param angle the amount of degrees you want the vehicle to turn left
      */
     @Override
-    public void turnRight(){
-        x = x + getCurrentSpeed();
+    public void turnRight(int angle){
+        setDirectionAngle(directionAngle + angle);
+    }
+
+    public double getDirectionAngle() {
+        return directionAngle;
+    }
+
+    public void setDirectionAngle(int directionAngle) {
+        this.directionAngle = directionAngle;
     }
 
     @Override

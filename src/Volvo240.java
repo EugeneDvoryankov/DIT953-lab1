@@ -10,11 +10,9 @@ public class Volvo240 extends Car{
 
     private final static double trimFactor = 1.25;
 
-    public Volvo240(){
-        setNrDoors(4);
-        setColor(Color.black);
-        setEnginePower(100);
-        setModelName("Volvo240");
+    public Volvo240(int nrDoors, double enginePower, double currentSpeed,
+                    Color color, String modelName){
+        super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         stopEngine();
     }
 

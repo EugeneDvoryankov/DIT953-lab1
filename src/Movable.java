@@ -5,6 +5,6 @@
 
 public interface Movable {
     void move();
-    void turnLeft();
-    void turnRight();
+    void turnLeft(int angle);
+    void turnRight(int angle);
 }
