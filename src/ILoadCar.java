@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public interface ILoadCar<C extends Car> {
+
     /** Adds a car to the Car Repair Shop
      *
      * @param car a Car
@@ -15,9 +16,9 @@ public interface ILoadCar<C extends Car> {
 
     /** Checks whether car's x and y coordinates are within 5 units from CarTransporter's
      *
-     * @param car a Car
+     * @param item a Car
      * @return true if car's x and y coordinates are within 5 units from CarTransporter's,
      * otherwise false
      */
-    public boolean isCarCloseEnough(C car);
+    public boolean isCarCloseEnough(C item);
 }
