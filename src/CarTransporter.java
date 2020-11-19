@@ -105,7 +105,7 @@ public class CarTransporter extends Vehicle {
 
 
     public boolean canLoadCar(Car car) {
-        return canInteractWithCar(car);
+        return canInteractWithCar(car) && car.getClass()!=this.getClass();
 
     }
 
