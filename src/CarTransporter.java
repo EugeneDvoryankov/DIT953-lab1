@@ -58,7 +58,8 @@ public class CarTransporter extends Vehicle {
     }
 
     public boolean isCarCloseEnough(Car c) {
-        return (getX() - 5 < c.getX() && c.getX() < getX() + 5) && (getY() - 5 < c.getY() && c.getY() < getY() + 5);
+        return (getX() - 5 < c.getX() && c.getX() < getX() + 5) 
+            && (getY() - 5 < c.getY() && c.getY() < getY() + 5);
     }
 
     /** Determines whether the truck is in motion;
