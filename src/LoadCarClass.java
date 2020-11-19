@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class LoadCarClass<C extends Car> implements ILoadCar{
-    private ArrayList<C> cars;
+    private ArrayList<C> cars ;
 
     /** Adds a car to the Car Repair Shop
      *
