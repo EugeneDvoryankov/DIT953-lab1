@@ -66,10 +66,7 @@ public class CarTransporter extends Vehicle {
      * otherwise returns false
      */
     public boolean isStationary() {
-        if(getCurrentSpeed() == 0){
-            return true;
-        }
-        return false;
+        return getCurrentSpeed() == 0;
     }
 
     /** Adds a car to the carTransporter's ramp
