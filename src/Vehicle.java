@@ -31,6 +31,9 @@ public abstract class Vehicle implements Movable{
         this.y = 0;
     }
 
+    public Vehicle(int i, int i1, int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int i2) {
+    }
+
     /**
      * Get the number of doors
      * @return the number of doors

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /** Represents a Car Repair Shop.
@@ -11,27 +12,23 @@ import java.util.LinkedList;
  * @param <C> a class that extends the Car, either the Volvo240 or Saab95 class
  */
 public class CarRepairShop<C extends Car> {
-    private LinkedList<C> cars;
+    private ArrayList<C> cars;
+
 
     /** Adds a car to the Car Repair Shop
      *
      * @param item a Car
      */
     public void loadCar(C item){
-        cars.push(item);
+        cars.add(item);
     }
 
     /** Removes a car from the Car Repair Shop
      *
+     * @param item a car
      */
-    public void removeCar(){
-        cars.pop();
-    }
-
-    /** Sees the next car in the Car Repair Shop
-     */
-    public void peekCar(){
-        cars.peek();
+    public void removeCar(C item){
+        cars.remove(item);
     }
 
     public static void main(String[] args) {
@@ -45,5 +42,7 @@ public class CarRepairShop<C extends Car> {
         CarRepairShop<Car> anyCarRepairShop = new CarRepairShop<>();
         anyCarRepairShop.loadCar(saab95);
         anyCarRepairShop.loadCar(volvo240);
+
+
     }
 }

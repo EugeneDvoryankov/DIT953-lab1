@@ -1,17 +1,21 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-public class CarTransporter<T extends Car> extends Vehicle{
+public class CarTransporter<C extends Car> extends Vehicle implements IRamp{
     private boolean rampUp;
     private int maxSize; // the max number of cars that the CarTransporter can hold.
-    private final FixedSizeStack<T> cars = new FixedSizeStack<>(getMaxSize()); // a stack with the cars that are loaded on the carTransport
+    private final ArrayList<C> cars = new ArrayList<C>(getMaxSize());
 
-    public CarTransporter(int maxSize) {
-        setNrDoors(2);
-        setColor(Color.blue);
-        setEnginePower(350); // 350 horse power
+
+
+    public CarTransporter(int nrDoors, double enginePower, double currentSpeed,
+                          Color color, String modelName, int maxSize) {
+
+        super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         rampUp = true;
         this.maxSize = maxSize;
-        setModelName("CarTransporter");
         stopEngine();
     }
 
@@ -33,13 +37,13 @@ public class CarTransporter<T extends Car> extends Vehicle{
 
     /** Sets the carTransporter's ramp up
      */
-    public void setRampUp(){
+    public void raiseRamp(){
         rampUp = true;
     }
 
     /** Sets the carTransporter's ramp down
      */
-    public void setRampDown(){
+    public void lowerRamp(){
         rampUp = false;
     }
 
@@ -47,8 +51,29 @@ public class CarTransporter<T extends Car> extends Vehicle{
      *
      * @return a boolean representing if ramp is up or down
      */
-    public boolean isRampUp() {
+    public boolean isRampRaised(){
         return rampUp;
+    }
+
+    /** Determines whether the truck is in motion;
+     * @return true if getCurrentSpeed() is equal to 0,
+     * otherwise returns false
+     */
+    public boolean isStationary() {
+        if(getCurrentSpeed() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    /** Checks whether car's x and y coordinates are within 5 units from CarTransporter's
+     *
+     * @param c a Car
+     * @return true if car's x and y coordinates are within 5 units from CarTransporter's,
+     * otherwise false
+     */
+    public boolean isCarCloseEnough(Car c) {
+        return  (getX()-5 < c.getX() & c.getX()<getX() + 5) & (getY()-5 < c.getY() & c.getY() <getY());
     }
 
     /** Adds a car to the carTransporter's ramp
@@ -57,9 +82,9 @@ public class CarTransporter<T extends Car> extends Vehicle{
      * ramp is down, and the cars are reasonably close to car
      * @param item a Car
      */
-    public void loadCar(T item){
-        if(canLoadCar(item)) {
-            cars.push(item);
+    public void loadCar(C item){
+        if(canLoadOrRemoveCar(item)) {
+            cars.add(item);
         }
     }
 
@@ -67,49 +92,30 @@ public class CarTransporter<T extends Car> extends Vehicle{
      *
      * Cars can only be removed if: the carTransporter is stationary
      * ramp is down, and the cars are reasonably close to car
-     * @param item a car
      */
-    public void removeCar(T item){
-        if(canRemoveCar(item)) {
-            cars.pop(item);
+    public void removeCar(C item){
+        if(canLoadOrRemoveCar(item)) {
+            cars.remove(item);
         }
     }
 
-    /** Checks if a car can be loaded to carTransporter
+    /** Checks if a car can be loaded or removed from carTransporter
      *
-     * Cars can only be loaded if: the carTransporter is stationary
+     * Cars can only be loaded or re,oved if: the carTransporter is stationary
      * ramp is down, and the cars are reasonably close to car
      * @param item a Car
      * @return boolean representing true if car can be loaded, otherwise false
      */
-    public boolean canLoadCar(T item){
-        if(getCurrentSpeed() == 0) {
+    public boolean canLoadOrRemoveCar(C item){
+        if(isStationary()) {
             if (!rampUp) {
-                if (isCarCloseEnough) {
+                if (isCarCloseEnough(item)) {
                     return true;
                 }
             }
         }
         return false;
     }
-
-    /** Checks if a car can be removed to carTransporter
-     * Cars can only be removed if: the carTransporter is stationary
-     * ramp is down, and the cars are reasonably close to car
-     * @param item a Car
-     * @return boolean representing true if car can be removed, otherwise false
-     */
-    public boolean canRemoveCar(T item){
-        if(getCurrentSpeed() == 0) {
-            if (!rampUp) {
-                if (isCarCloseEnough) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 
     /** Returns a speedFactor based on carTranpsporter's enginePower.
      * @return the speedFactor
@@ -118,7 +124,6 @@ public class CarTransporter<T extends Car> extends Vehicle{
     public double speedFactor(){
         return getEnginePower() * 0.01;
     }
-
 
     /**
      * Gas the carTransporter.
@@ -129,7 +134,7 @@ public class CarTransporter<T extends Car> extends Vehicle{
      */
     @Override
     public void gas(double amount) {
-        if(isRampUp()) {
+        if(isRampRaised()) {
             if (amount >= 0 & amount <= 1) {
                 incrementSpeed(amount);
             }
