@@ -5,33 +5,17 @@ import java.util.ArrayList;
 
 public class CarTransporter extends Vehicle {
     private boolean rampUp;
-    //private int maxSize; // the max number of cars that the CarTransporter can hold.
+    private int maxSize; // the max number of cars that the CarTransporter can hold.
     private final List<Car> cars;
 
     public CarTransporter(int nrDoors, double enginePower, double currentSpeed,
                           Color color, String modelName, int maxSize) {
-        super(0, 0, nrDoors, enginePower, currentSpeed, color, modelName, 0);
+        super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         rampUp = true;
-        cars = new ArrayList<>(maxSize);
+        this.maxSize = maxSize;
+        cars = new ArrayList<>();
         stopEngine();
     }
-
- /*  /** Gets the max number of cars that the CarTransporter can hold
-     *
-     * @return the max number of cars that the CarTransporter can hold
-     *
-    public int getMaxSize(){
-        return maxSize;
-    }
-
-    /**Sets the max number of cars that the CarTransporter can hold
-     *
-     * @param maxSize the number of cars wanted
-     *
-    public void setMaxSize(int maxSize){
-        this.maxSize = maxSize;
-    }
-    */
 
     /**
      * Sets the carTransporter's ramp up
@@ -57,6 +41,20 @@ public class CarTransporter extends Vehicle {
         return rampUp;
     }
 
+    /**
+     * Gets a list of cars that are currently on the CarTransporter.
+     *
+     * @return List cars that contains the car's that are currently on the CarTransporter.
+     */
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    /** Checks if car is close enough to CarTransporter for pickup.
+     *
+     * @param c the car that you want to load on to the CarTransporter.
+     * @return boolean true if the car is close enough, otherwise false.
+     */
     public boolean isCarCloseEnough(Car c) {
         return (getX() - 5 < c.getX() && c.getX() < getX() + 5) && (getY() - 5 < c.getY() && c.getY() < getY() + 5);
     }
@@ -66,10 +64,7 @@ public class CarTransporter extends Vehicle {
      * otherwise returns false
      */
     public boolean isStationary() {
-        if(getCurrentSpeed() == 0){
-            return true;
-        }
-        return false;
+        return getCurrentSpeed() == 0;
     }
 
     /** Adds a car to the carTransporter's ramp
@@ -78,7 +73,6 @@ public class CarTransporter extends Vehicle {
      *
      * @param car a Car
      */
-
     public void loadCar(Car car) {
         if (canLoadCar(car)) {
             cars.add(car);
@@ -86,49 +80,60 @@ public class CarTransporter extends Vehicle {
     }
 
     /**
-     * Removes a car from the carTransporter's ramp
-     * <p>
-     * Cars can only be removed if: the carTransporter is stationary
-     * ramp is down, and the cars are reasonably close to car
+     * Unloads a car from the carTransporter's ramp
+     * Cars can only be unloaded if: the carTransporter is stationary
+     * ramp is down, and the cars are reasonably close to CarTransporter.
      *
-     * @param car a car
      */
-    public void removeCar(Car car) {
-        if (canRemoveCar(car)) {
+    public void unloadCar() {
+        if (canUnloadCar()) {
             cars.get(lastLoadedIndex()).setX(getX() + 5);
             cars.get(lastLoadedIndex()).setX(getY());
             cars.remove(lastLoadedIndex());
         }
     }
 
+    /** Returns the index of the last car added into the list cars.
+     *
+     * @return index of the car last loaded
+     */
     int lastLoadedIndex() {
         return cars.size() - 1;
     }
 
 
+    /**
+     * Checks if CarTransporter can load the car.
+     *
+     * @param car the car that wants to be loaded
+     * @return a boolean that's true if car can be loaded, otherwise false
+     */
     public boolean canLoadCar(Car car) {
-        return canInteractWithCar(car);
-
+        if(maxSize > cars.size()) {
+            return canLoadOrUnloadCar() && isCarCloseEnough(car);
+        }
+        return false;
     }
 
-    public boolean canRemoveCar(Car car) {
-        return canInteractWithCar(car) && !cars.isEmpty();
+    /**
+     * Checks if CarTransporter can unload a car.
+     * CarTransporter has to contain at least one car, if a car is supposed to be unloaded
+     * @return boolean that is true if cartransporter can unload car, otherwise false.
+     */
+    public boolean canUnloadCar() {
+        return !cars.isEmpty() && canLoadOrUnloadCar();
 
     }
 
     /**
-     * Checks if a car can be loaded to/removed from carTransporter
-     * Cars can only be loaded/removed if: the carTransporter is stationary
-     * ramp is down, and the cars are reasonably close to car
+     * Checks if a car can interact with CarTransporter, ie if CarTransporter is stationary, car is close enough and ramp is down
      *
-     * @param car a Car
+
      * @return boolean representing true if car can be loaded/removed, otherwise false
      */
-    public boolean canInteractWithCar(Car car) {
-        if (getCurrentSpeed() == 0) {
-            if (!rampUp) {
-                return isCarCloseEnough(car);
-            }
+    public boolean canLoadOrUnloadCar() {
+        if (isStationary()) {
+            return !rampUp;
         }
         return false;
     }
@@ -139,9 +144,7 @@ public class CarTransporter extends Vehicle {
      * @return the speedFactor
      */
     @Override
-    public double speedFactor() {
-        return getEnginePower() * 0.01;
-    }
+    public double speedFactor() { return getEnginePower() * 0.01; }
 
     /**
      * Gas the carTransporter.
@@ -153,7 +156,6 @@ public class CarTransporter extends Vehicle {
      */
     @Override
     public void gas(double amount) {
-
         if(isRampRaised()) {
             if (amount >= 0 & amount <= 1) {
                 incrementSpeed(amount);
@@ -161,6 +163,30 @@ public class CarTransporter extends Vehicle {
         }
     }
 
+    /**
+     * Helper method for testing.
+     * Converts the list cars into a string which contains the names of the cars.
+     * @return the names of the cars as a string.
+     */
+    public String carsToString() {
+        if(cars.isEmpty()) {
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[");
+        for(int i = 0; i<cars.size() -1; i++) {
+            sb.append(cars.get(i).getModelName());
+            sb.append(", ");
+        }
+        sb.append(cars.get(cars.size() -1).getModelName());
+        sb.append("]");
+        return sb.toString();
+    }
+
+    /** Moves the CarTransporter forwards in a certain direction.
+     * Changes x and y values for CarTransporter, as well as for the cars that are loaded onboard.
+     */
     @Override
     public void move() {
         super.move();
