@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.LinkedList;
 
 /** Represents a Car Repair Shop.
@@ -34,8 +35,8 @@ public class CarRepairShop<C extends Car> {
     }
 
     public static void main(String[] args) {
-        Saab95 saab95 = new Saab95();
-        Volvo240 volvo240 = new Volvo240();
+        Saab95 saab95 = new Saab95(4, 100,0, Color.black, "Saab95");
+        Volvo240 volvo240 = new Volvo240(4, 100,0, Color.black, "Volvo240");
         CarRepairShop<Saab95> saab95RepairShop = new CarRepairShop<>();
 
         saab95RepairShop.loadCar(saab95);

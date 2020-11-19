@@ -5,13 +5,11 @@ public class CarTransporter<T extends Car> extends Vehicle{
     private int maxSize; // the max number of cars that the CarTransporter can hold.
     private final FixedSizeStack<T> cars = new FixedSizeStack<>(getMaxSize()); // a stack with the cars that are loaded on the carTransport
 
-    public CarTransporter(int maxSize) {
-        setNrDoors(2);
-        setColor(Color.blue);
-        setEnginePower(350); // 350 horse power
+    public CarTransporter(int nrDoors, double enginePower, double currentSpeed,
+                          Color color, String modelName, int maxSize) {
+        super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         rampUp = true;
         this.maxSize = maxSize;
-        setModelName("CarTransporter");
         stopEngine();
     }
 
@@ -90,9 +88,7 @@ public class CarTransporter<T extends Car> extends Vehicle{
     public boolean canLoadCar(T item){
         if(getCurrentSpeed() == 0) {
             if (!rampUp) {
-                if (isCarCloseEnough(item)) {
-                    return true;
-                }
+                return isCarCloseEnough(item);
             }
         }
         return false;
@@ -107,9 +103,7 @@ public class CarTransporter<T extends Car> extends Vehicle{
     public boolean canRemoveCar(T item){
         if(getCurrentSpeed() == 0) {
             if (!rampUp) {
-                if (isCarCloseEnough(item)) {
-                    return true;
-                }
+                return isCarCloseEnough(item);
             }
         }
         return false;

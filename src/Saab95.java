@@ -11,12 +11,10 @@ public class Saab95 extends Car {
 
     private boolean turboOn;
 
-    public Saab95(){
-        setNrDoors(2);
-        setColor(Color.red);
-        setEnginePower(125);
+    public Saab95(int nrDoors, double enginePower, double currentSpeed,
+                  Color color, String modelName){
+        super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         turboOn = false;
-        setModelName("Saab95");
         stopEngine();
     }
 

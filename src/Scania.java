@@ -14,12 +14,10 @@ public class Scania extends Truck{
 
     private int platformAngle; // the angle the platform is at
 
-    public Scania(){
-        setNrDoors(2);
-        setColor(Color.red);
-        setEnginePower(350); // 350 horse power
+    public Scania(int nrDoors, double enginePower, double currentSpeed,
+                  Color color, String modelName){
+        super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         platformAngle = 0; // set platformAngle to 0 ????
-        setModelName("Scania");
         stopEngine();
     }
 
@@ -68,10 +66,7 @@ public class Scania extends Truck{
      * otherwise returns false
      */
     public boolean canRaisePlatformAngle() {
-        if(getCurrentSpeed() == 0){
-            return true;
-        }
-        return false;
+        return getCurrentSpeed() == 0;
     }
 
     /** Checks if the platform is raised.
@@ -81,10 +76,7 @@ public class Scania extends Truck{
      * otherwise returns false
      */
     public boolean isPlatformRaised(){
-        if (getPlatformAngle() > 0) {
-            return true;
-        }
-        return false;
+        return getPlatformAngle() > 0;
     }
 
 
