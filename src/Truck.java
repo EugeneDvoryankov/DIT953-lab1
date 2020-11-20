@@ -7,6 +7,4 @@ public abstract class Truck extends Vehicle {
                  Color color, String modelName, int directionAngle) {
         super(x, y, nrDoors, enginePower, currentSpeed, color, modelName, directionAngle);
     }
-    
-
-}
+ }

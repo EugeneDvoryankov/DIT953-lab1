@@ -4,21 +4,18 @@ import static java.lang.Math.*;
 
 /** Represents a base model of a vehicle that all other vehicles are based on.
  * It has the following attributes:
- * The vehicle's current x coordinate,
- * the vehicle's current y coordinate,
- * the number of doors on the vehicle,
- * the engine power of the vehicle,
- * the current speed of the vehicle,
- * the vehicle's color,
+ * The vehicle's current x coordinate
+ * The vehicle's current y coordinate
+ * The number of doors on the vehicle
+ * The engine power of the vehicle
+ * The current speed of the vehicle
+ * The vehicle's color
  * The vehicle's modelName.
  * Has getters and setters for all attributes except setters for x and y coordinate.
  * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
- * for the purpose of increasing or decreasing the car's speed.
+ * for the purpose of increasing or decreasing the vehicle's speed.
  */
 public abstract class Vehicle implements Movable{
-    /* In order to avoid duplication
-    we created a Car class that will contain all the instance variables and methods
-    that exist in both Saab95 and Volvo240 classes */
 
     private double x; // The vehicle's x direction
     private double y; // The vehicle's y direction
@@ -158,18 +155,10 @@ public abstract class Vehicle implements Movable{
         return y;
     }
 
-    /**
-     * Set X coordinate for the vehicle
-     * @param x the X coordinate of the vehicle
-     */
     public void setX(double x) {
         this.x = x;
     }
 
-    /**
-     * Set y coordinate for the vehicle
-     * @param y the y coordinate of the vehicle.
-     */
     public void setY(double y) {
         this.y = y;
     }
@@ -203,6 +192,10 @@ public abstract class Vehicle implements Movable{
         setDirectionAngle(directionAngle + angle);
     }
 
+    public double getDirectionAngle() {
+        return directionAngle;
+    }
+
 
     /**
      * Sets the angle for which direction the vehicle is facing towards. With 0 degrees being up,
@@ -226,6 +219,7 @@ public abstract class Vehicle implements Movable{
      * Helper method for testing purposes.
      * @return x and y coordinates, as well as currentSpeed in string format.
      */
+
     @Override
     public String toString(){
         return "( x: " + getX() + ", y: "  + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
