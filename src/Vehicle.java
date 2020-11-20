@@ -196,9 +196,29 @@ public abstract class Vehicle implements Movable{
         return directionAngle;
     }
 
-    public void setDirectionAngle(int directionAngle) {
+
+    /**
+     * Sets the angle for which direction the vehicle is facing towards. With 0 degrees being up,
+     * -90 degrees being left, and 90 degrees being right
+     *
+     * @param directionAngle the angle that you want the car to face towards.
+     */
+    private void setDirectionAngle(int directionAngle) {
         this.directionAngle = directionAngle;
     }
+
+    /**
+     * Gets the direction angle for the car.
+     * @return the angle that the car is facing towards.
+     */
+    public int getDirectionAngle() {
+        return directionAngle;
+    }
+
+    /**
+     * Helper method for testing purposes.
+     * @return x and y coordinates, as well as currentSpeed in string format.
+     */
 
     @Override
     public String toString(){
