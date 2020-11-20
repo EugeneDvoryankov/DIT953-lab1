@@ -25,7 +25,9 @@ public class CarRepairShop<C extends Car> {
     }
 
 
-    /** Adds a car to the Car Repair Shop
+    /** Adds a car to the Car Repair Shop.
+     * You can only add new cars to the repair shop if the maxSize isn't reached yet,
+     * ie you can't add car if the shop is full.
      *
      * @param item a Car
      */
@@ -43,6 +45,10 @@ public class CarRepairShop<C extends Car> {
         cars.remove(item);
     }
 
+    /**
+     * Gets the list of cars currently in Car repair shop.
+     * @return the list of cars currently in car repair shop.
+     */
     public List<C> getCars() {
         return cars;
     }
