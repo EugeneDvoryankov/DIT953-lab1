@@ -192,10 +192,6 @@ public abstract class Vehicle implements Movable{
         setDirectionAngle(directionAngle + angle);
     }
 
-    public double getDirectionAngle() {
-        return directionAngle;
-    }
-
 
     /**
      * Sets the angle for which direction the vehicle is facing towards. With 0 degrees being up,
