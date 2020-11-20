@@ -1,3 +1,5 @@
+package notInUse;
+
 import java.util.Stack;
 
 public class FixedSizeStack<T> {
@@ -27,7 +29,7 @@ public class FixedSizeStack<T> {
 
     @Override
     public String toString() {
-        return "FixedSizeStack{" +
+        return "notInUse.FixedSizeStack{" +
                 "stack=" + stack +
                 ", maxSize=" + maxSize +
                 ", currentSize=" + currentSize +
