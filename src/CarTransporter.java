@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CarTransporter extends Truck {
+public class CarTransporter extends Vehicle {
     private boolean rampUp;
     private int maxSize; // the max number of cars that the CarTransporter can hold.
     private final List<Car> cars;
@@ -12,7 +12,7 @@ public class CarTransporter extends Truck {
                           Color color, String modelName, int maxSize) {
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         rampUp = true;
-        this.maxSize = maxSize;
+        this.maxSize = Math.min(maxSize, 6);
         cars = new ArrayList<>();
         stopEngine();
     }

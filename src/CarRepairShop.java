@@ -3,6 +3,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import java.util.List;
+
 /** Represents a Car Repair Shop.
  *
  * A Car Repair Shop loads a number of cars, up to a maximum number that can vary between different workshops.
@@ -14,15 +16,25 @@ import java.util.LinkedList;
  * @param <C> a class that extends the Car, either the Volvo240 or Saab95 class
  */
 public class CarRepairShop<C extends Car> {
-    private ArrayList<C> cars;
+    private List<C> cars;
+    private int maxSize;
+
+    public CarRepairShop(int maxSize){
+        this.maxSize = maxSize;
+        this.cars = new ArrayList<>();
+    }
 
 
-    /** Adds a car to the Car Repair Shop
+    /** Adds a car to the Car Repair Shop.
+     * You can only add new cars to the repair shop if the maxSize isn't reached yet,
+     * ie you can't add car if the shop is full.
      *
      * @param item a Car
      */
     public void loadCar(C item){
-        cars.add(item);
+        if(maxSize > cars.size()) {
+            cars.add(item);
+        }
     }
 
     /** Removes a car from the Car Repair Shop
@@ -33,15 +45,25 @@ public class CarRepairShop<C extends Car> {
         cars.remove(item);
     }
 
+    /**
+     * Gets the list of cars currently in Car repair shop.
+     * @return the list of cars currently in car repair shop.
+     */
+    public List<C> getCars() {
+        return cars;
+    }
+
+
+
     public static void main(String[] args) {
         Saab95 saab95 = new Saab95(4, 100,0, Color.black, "Saab95");
         Volvo240 volvo240 = new Volvo240(4, 100,0, Color.black, "Volvo240");
-        CarRepairShop<Saab95> saab95RepairShop = new CarRepairShop<>();
+        CarRepairShop<Saab95> saab95RepairShop = new CarRepairShop<>(2);
 
         saab95RepairShop.loadCar(saab95);
         //saab95RepairShop.loadCar(volvo240);
 
-        CarRepairShop<Car> anyCarRepairShop = new CarRepairShop<>();
+        CarRepairShop<Car> anyCarRepairShop = new CarRepairShop<>(2);
         anyCarRepairShop.loadCar(saab95);
         anyCarRepairShop.loadCar(volvo240);
 
