@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CarTransporter extends Vehicle {
     private boolean rampUp;
-    private int maxSize; // the max number of cars that the CarTransporter can hold.
+    private final int maxSize; // the max number of cars that the CarTransporter can hold.
     private final List<Car> cars;
 
     public CarTransporter(int nrDoors, double enginePower, double currentSpeed,
@@ -68,6 +68,10 @@ public class CarTransporter extends Vehicle {
         return getCurrentSpeed() == 0;
     }
 
+    public boolean isCarStationary(Car car) {
+        return car.getCurrentSpeed() == 0;
+    }
+
     /** Adds a car to the carTransporter's ramp
      * Cars can only be loaded if: the carTransporter is stationary
      * ramp is down, and the cars are reasonably close to car
@@ -75,7 +79,7 @@ public class CarTransporter extends Vehicle {
      * @param car a Car
      */
     public void loadCar(Car car) {
-        if (canLoadCar(car)) {
+        if (canLoadCar(car) && isCarStationary(car)) {
             cars.add(car);
         }
     }
@@ -130,7 +134,6 @@ public class CarTransporter extends Vehicle {
     /**
      * Checks if a car can interact with CarTransporter, ie if CarTransporter is stationary, car is close enough and ramp is down
      *
-
      * @return boolean representing true if car can be loaded/removed, otherwise false
      */
     public boolean canLoadOrUnloadCar() {
