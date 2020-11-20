@@ -2,15 +2,15 @@ import java.awt.*;
 
 import static java.lang.Math.*;
 
-/** Represents a base model of a car that all other car's are based on.
+/** Represents a base model of a vehicle that all other vehicles are based on.
  * It has the following attributes:
- * The car's current x coordinate
- * The car's current y coordinate
+ * The vehicle's current x coordinate
+ * The vehicle's current y coordinate
  * The number of doors on the car
  * The engine power of the car
  * The current speed of the car
- * The car's color
- * The car's modelName.
+ * The vehicle's color
+ * The vehicle's modelName.
  * Has getters and setters for all attributes except setters for x and y coordinate.
  * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
  * for the purpose of increasing or decreasing the car's speed.
@@ -20,13 +20,13 @@ public abstract class Vehicle implements Movable{
     we created a Car class that will contain all the instance variables and methods
     that exist in both Saab95 and Volvo240 classes */
 
-    private double x; // The cars's x direction
-    private double y; // The car's y direction
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private String modelName; // The car model name
+    private double x; // The vehicle's x direction
+    private double y; // The vehicle's y direction
+    private int nrDoors; // Number of doors on the vehicle
+    private double enginePower; // Engine power of the vehicle
+    private double currentSpeed; // The current speed of the vehicle
+    private Color color; // Color of the vehicle
+    private String modelName; // The vehicle model name
     private int directionAngle;
 
     public Vehicle(double x, double y, int nrDoors, double enginePower, double currentSpeed,
@@ -95,7 +95,7 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Get the color of the car
+     * Get the color of the vehicle
      * @return the color
      */
     public Color getColor() {
@@ -143,7 +143,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the X coordinate (For testing purposes)
-     * @return the X coordinate of the car
+     * @return the X coordinate of the vehicle
      */
     public double getX() {
         return x;
@@ -152,7 +152,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the Y coordinate (For testing purposes)
-     * @return the Y coordinate of the car
+     * @return the Y coordinate of the vehicle
      */
     public double getY() {
         return y;
@@ -167,7 +167,7 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Move the Car forwards.
+     * Move the Vehicle forwards.
      *
      */
     @Override
@@ -178,7 +178,7 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Turn the car to the left.
+     * Turn the vehicle to the left.
      * @param angle the amount of degrees you want the vehicle to turn left
      */
     @Override
@@ -187,7 +187,7 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Turn the car to the right.
+     * Turn the vehicle to the right.
      * @param angle the amount of degrees you want the vehicle to turn left
      */
     @Override
@@ -216,7 +216,7 @@ public abstract class Vehicle implements Movable{
 
     public abstract double speedFactor();
 
-    /** Increases the car's currentSpeed.
+    /** Increases the vehicle's currentSpeed.
      *
      * @param amount a multiplier for how much the speed should increase, taken from gas.
      */
@@ -225,7 +225,7 @@ public abstract class Vehicle implements Movable{
         setCurrentSpeed(newSpeed);
     }
 
-    /** Decreases the car's currentSpeed.
+    /** Decreases the vehicle's currentSpeed.
      *
      * @param amount a multiplier for how much the speed should decrease, taken from brake.
      */
@@ -235,7 +235,7 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Gas the car.
+     * Gas the vehicle.
      *
      * Takes a number between 1 and 0.
      * @param amount how hard you press the gas
@@ -247,7 +247,7 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Brake the car.
+     * Brake the vehicle.
      * Takes a number between 1 and 0.
      * @param amount how hard you press the brakes
      */
