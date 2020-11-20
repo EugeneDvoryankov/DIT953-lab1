@@ -8,24 +8,5 @@ public abstract class Truck extends Vehicle {
         super(x, y, nrDoors, enginePower, currentSpeed, color, modelName, directionAngle);
     }
     
-    **
-     * Gas the truck.
-     *
-     * If the platform is raised then the truck will not gas.
-     * Takes a number between 1 and 0.
-     * @param amount how hard you press the gas
-     */
-    @Override
-    public void gas(double amount) {
-        if(!isPlatformRaised()) {
-            super.gas(amount);
-        }
-    }
-    
-    @Override
-    public void startEngine(double amount) {
-        if(!isPlatformRaised()) {
-            super.startEngine(amount);
-        }
-    }
+
 }

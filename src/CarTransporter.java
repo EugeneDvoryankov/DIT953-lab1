@@ -12,7 +12,7 @@ public class CarTransporter extends Truck {
                           Color color, String modelName, int maxSize) {
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         rampUp = true;
-        this.maxSize = maxSize;
+        this.maxSize = Math.min(maxSize, 6);
         cars = new ArrayList<>();
         stopEngine();
     }
