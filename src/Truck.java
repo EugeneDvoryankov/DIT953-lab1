@@ -21,4 +21,11 @@ public abstract class Truck extends Vehicle {
             super.gas(amount);
         }
     }
+    
+    @Override
+    public void startEngine(double amount) {
+        if(!isPlatformRaised()) {
+            super.startEngine(amount);
+        }
+    }
 }
