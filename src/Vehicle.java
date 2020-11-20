@@ -6,19 +6,16 @@ import static java.lang.Math.*;
  * It has the following attributes:
  * The vehicle's current x coordinate
  * The vehicle's current y coordinate
- * The number of doors on the car
- * The engine power of the car
- * The current speed of the car
+ * The number of doors on the vehicle
+ * The engine power of the vehicle
+ * The current speed of the vehicle
  * The vehicle's color
  * The vehicle's modelName.
  * Has getters and setters for all attributes except setters for x and y coordinate.
  * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
- * for the purpose of increasing or decreasing the car's speed.
+ * for the purpose of increasing or decreasing the vehicle's speed.
  */
 public abstract class Vehicle implements Movable{
-    /* In order to avoid duplication
-    we created a Car class that will contain all the instance variables and methods
-    that exist in both Saab95 and Volvo240 classes */
 
     private double x; // The vehicle's x direction
     private double y; // The vehicle's y direction
