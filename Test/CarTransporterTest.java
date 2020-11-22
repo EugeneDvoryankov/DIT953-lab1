@@ -56,8 +56,18 @@ public class CarTransporterTest {
         cartransporter.loadCar(volvo1);
         cartransporter.loadCar(volvo2);
         assertEquals("[Volvo1, Volvo2]", cartransporter.carsToString());
+    }
 
-
+    @Test
+    public void loadCarWithoutToString() {
+        CarTransporter cartransporter = new CarTransporter(3, 350, 0, Color.red, "Cartransporter",
+                2);
+        Volvo240 volvo1 = new Volvo240(4, 100, 0, Color.black, "Volvo1");
+        Volvo240 volvo2 = new Volvo240(4, 100, 0, Color.black, "Volvo2");
+        cartransporter.lowerRamp();
+        cartransporter.loadCar(volvo1);
+        cartransporter.loadCar(volvo2);
+        assertEquals(volvo2, cartransporter.getCars().get(1));
     }
 
     @Test

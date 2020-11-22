@@ -8,13 +8,13 @@ import java.awt.*;
  * setTurboOn(), setTurboOff(), isTurboOn() and speedFactor()
  */
 public class Saab95 extends Car {
+private Turbo turbo = new Turbo();
 
-    private boolean turboOn;
 
     public Saab95(int nrDoors, double enginePower, double currentSpeed,
                   Color color, String modelName){
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
-        turboOn = false;
+        setTurboOff();
         stopEngine();
     }
 
@@ -22,21 +22,21 @@ public class Saab95 extends Car {
      * Sets turboOn true.
      */
     public void setTurboOn(){
-	    turboOn = true;
+	    turbo.setTurboOn();
     }
 
     /**
      *  Sets turboOn false.
      */
     public void setTurboOff(){
-	    turboOn = false;
+	    turbo.setTurboOff();
     }
 
     /**
      * @return a boolean representing turboOn is true or false.
      */
     public boolean isTurboOn() {
-        return turboOn;
+        return turbo.isTurboOn();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Saab95 extends Car {
     @Override
     public double speedFactor(){
         double turbo = 1;
-        if(turboOn) turbo = 1.3;
+        if(isTurboOn()) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
 }

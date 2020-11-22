@@ -13,13 +13,36 @@ import java.awt.*;
  */
 public class Scania extends Truck{
 
-    private int platformAngle; // the angle the platform is at
+    private int platformAngle; // the angle the platform is at, the platform is considered a ramp
+    private final Ramp ramp = new Ramp();
 
     public Scania(int nrDoors, double enginePower, double currentSpeed,
                   Color color, String modelName){
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         platformAngle = 0; // set platformAngle to 0 ????
         stopEngine();
+    }
+
+    /**
+     * Changes the state of the ramp to raised.
+     */
+    private void raiseRamp() {
+        ramp.raiseRamp();
+    }
+
+    /**
+     * Changes the state of the ramp to lowered.
+     */
+    private void lowerRamp() {
+        ramp.lowerRamp();
+    }
+
+    /**
+     * Checks if ramp can be raised.
+     * @return boolean true if ramp can be raised, otherwise boolean false.
+     */
+    public boolean isRampRaised() {
+        return ramp.isRampRaised();
     }
 
     /** Gets platformAngle of the Scania
@@ -49,6 +72,7 @@ public class Scania extends Truck{
         if(canRaisePlatformAngle()) {
             setPlatformAngle(newAngle);
         }
+        raiseOrLowerRamp();
     }
 
     /** Decreases the angle of the platform
@@ -58,6 +82,19 @@ public class Scania extends Truck{
     public void lowerPlatformAngle(int amount){
         int newAngle = Math.max(getPlatformAngle() - amount, 0);
         setPlatformAngle(newAngle);
+        raiseOrLowerRamp();
+    }
+
+    /**
+     * Either raises or lowers ramp, depending on the platform angle.
+     * This mains that the ramp is considered raised if the angle is above 0, and lowered if it's currently 0.
+     */
+    public void raiseOrLowerRamp() {
+        if(getPlatformAngle() > 0) {
+            raiseRamp();
+        } else {
+            lowerRamp();
+        }
     }
 
     /** Determines whether the truck can raise the platform.
@@ -88,6 +125,7 @@ public class Scania extends Truck{
     public double speedFactor() {
         return getEnginePower() * 0.01;
     }
+
     /**
      * Gas the truck.
      *
@@ -101,7 +139,6 @@ public class Scania extends Truck{
             super.gas(amount);
         }
     }
-    //can't be in Class Truck since it contains isPlatformRaised()
 
     /**
      * Starts the engine of the truck.
@@ -114,6 +151,5 @@ public class Scania extends Truck{
             super.startEngine();
         }
     }
-    //can't be in Class Truck since it contains isPlatformRaised()
 }
 
