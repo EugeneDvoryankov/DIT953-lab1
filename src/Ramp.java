@@ -1,12 +1,20 @@
 public class Ramp {
 
-    public boolean rampUp;
-    public boolean isRampRaised;
-
-    public boolean isStationary() {
-
-    }
+    private boolean rampUp = true;
 
     public boolean isRampRaised() {
+        return rampUp;
     }
+
+    public void raiseRamp() {
+        rampUp = true;
+
+    }
+
+    public void lowerRamp() {
+        rampUp = false;
+    }
+
+
+
 }

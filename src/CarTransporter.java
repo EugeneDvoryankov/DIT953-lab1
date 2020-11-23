@@ -3,16 +3,18 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CarTransporter extends Truck implements IRamp{
+
+public class CarTransporter extends Truck {
+
     private LoadCar carLoader; // A reference to the LoadCar class
     private boolean rampUp;
     private final int maxSize; // the max number of cars that the CarTransporter can hold.
     private final List<Car> cars;
+    private final Ramp ramp = new Ramp();
 
     public CarTransporter(int nrDoors, double enginePower, double currentSpeed,
                           Color color, String modelName, int maxSize) {
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
-        rampUp = true;
         this.maxSize = Math.min(maxSize, 6);
         cars = new ArrayList<>();
         stopEngine();
@@ -22,14 +24,16 @@ public class CarTransporter extends Truck implements IRamp{
      * Sets the carTransporter's ramp up
      */
     public void raiseRamp(){
-        rampUp = true;
+        ramp.raiseRamp();
     }
 
     /**
      * Sets the carTransporter's ramp down
      */
     public void lowerRamp(){
-        rampUp = false;
+        if(isStationary()) {
+            ramp.lowerRamp();
+        }
     }
 
     /**
@@ -38,8 +42,9 @@ public class CarTransporter extends Truck implements IRamp{
      * @return a boolean representing if ramp is up or down
      */
     public boolean isRampRaised(){
-        return rampUp;
+        return ramp.isRampRaised();
     }
+
 
     /** Determines whether the truck is in motion;
      * @return true if getCurrentSpeed() is equal to 0,
@@ -130,7 +135,9 @@ public class CarTransporter extends Truck implements IRamp{
      * @return boolean representing true if car can be loaded/removed, otherwise false
      */
     public boolean canLoadOrUnloadCar() {
+
         return carLoader.canLoadOrUnloadCar();
+
     }
 
     /**
@@ -159,6 +166,32 @@ public class CarTransporter extends Truck implements IRamp{
         for(Car car: cars) {
             car.setX(getX());
             car.setY(getY());
+        }
+    }
+
+    /**
+     * Gas the truck.
+     *
+     * If the platform is raised then the truck will not gas.
+     * Takes a number between 1 and 0.
+     * @param amount how hard you press the gas
+     */
+    @Override
+    public void gas(double amount) {
+        if(isRampRaised()) {
+            super.gas(amount);
+        }
+    }
+
+    /**
+     * Starts the engine of the truck.
+     * If the platform is raised, then the engine will not start.
+     */
+
+    @Override
+    public void startEngine() {
+        if(isRampRaised()) {
+            super.startEngine();
         }
     }
 }
