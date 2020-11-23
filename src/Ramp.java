@@ -1,4 +1,5 @@
 public class Ramp {
+
     private boolean rampUp = true;
 
     public boolean isRampRaised() {

@@ -11,7 +11,7 @@ import java.awt.*;
  * for the purpose of increasing and decreasing platform angle
  * and to check if platform is raised (angle is greater than zero)
  */
-public class Scania extends Truck{
+public class Scania extends Truck implements IRamp {
 
     private int platformAngle; // the angle the platform is at, the platform is considered a ramp
     private final Ramp ramp = new Ramp();
@@ -45,6 +45,7 @@ public class Scania extends Truck{
         return ramp.isRampRaised();
     }
 
+
     /** Gets platformAngle of the Scania
      *
      * @return the platformAngle of the Scania
@@ -61,25 +62,25 @@ public class Scania extends Truck{
         this.platformAngle = platformAngle;
     }
 
-    /** Increases the angle of the platform
+    /** Increases the angle of the ramp with 10°
      *
      *  The angle of the platform can not be lower than 0° or higher than 70°
      *  The platform must not be raised if the truck is in motion
-     *  @param amount a value for how much the angle should increase
      */
-    public void raisePlatformAngle(int amount){
+    public void raiseRamp(){
+        int amount = 10;
         int newAngle = Math.min(getPlatformAngle() + amount, 70);
-        if(canRaisePlatformAngle()) {
+        if(isStationary()) {
             setPlatformAngle(newAngle);
         }
         raiseOrLowerRamp();
     }
 
-    /** Decreases the angle of the platform
+    /** Decreases the angle of the platform with 10°
      *  The angle of the platform can not be lower than 0° or higher than 70°
-     *  @param amount a value for how much the angle should decrease
      */
-    public void lowerPlatformAngle(int amount){
+    public void lowerRamp(){
+        int amount = 10;
         int newAngle = Math.max(getPlatformAngle() - amount, 0);
         setPlatformAngle(newAngle);
         raiseOrLowerRamp();
@@ -97,26 +98,23 @@ public class Scania extends Truck{
         }
     }
 
-    /** Determines whether the truck can raise the platform.
-     *
-     * The platform must not be raised if the truck is in motion;
-     * @return true if getCurrentSpeed() is equal to 0,
-     * otherwise returns false
-     */
-    public boolean canRaisePlatformAngle() {
-        return getCurrentSpeed() == 0;
-    }
-
     /** Checks if the platform is raised.
      *
      * The angle of the platform can not be lower than 0° or higher than 70°
      * @return true if platformAngle is greater than zero,
      * otherwise returns false
      */
-    public boolean isPlatformRaised(){
+    public boolean isRampRaised(){
         return getPlatformAngle() > 0;
     }
 
+    /** Determines whether the truck is in motion;
+     * @return true if getCurrentSpeed() is equal to 0,
+     * otherwise returns false
+     */
+    public boolean isStationary() {
+        return getCurrentSpeed() == 0;
+    }
 
     /** Returns a speedFactor based on Scania's enginePower.
      * @return the speedFactor
@@ -135,7 +133,7 @@ public class Scania extends Truck{
      */
     @Override
     public void gas(double amount) {
-        if(!isPlatformRaised()) {
+        if(!isRampRaised()) {
             super.gas(amount);
         }
     }
@@ -144,12 +142,12 @@ public class Scania extends Truck{
      * Starts the engine of the truck.
      * If the platform is raised, then the engine will not start.
      */
-
     @Override
     public void startEngine() {
-        if(!isPlatformRaised()) {
+        if(!isRampRaised()) {
             super.startEngine();
         }
     }
+
 }
 

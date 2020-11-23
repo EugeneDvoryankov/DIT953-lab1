@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CarRepairShop<C extends Car> {
-    private LoadCar carLoader; // A reference to the LoadCar class
-    private double x; // The CarRepairShop's x direction
-    private double y; // The CarRepairShop's y direction
-    private final List<C> cars;
+public class LoadCar implements ILoadCar {
+    private Ramp ramp;
+    private double x;
+    private double y;
+    private final List<Car> cars;
     private int maxSize;
 
-    public CarRepairShop(double x, double y, int maxSize){
+    public LoadCar(double x, double y, int maxSize){
         this.x = x;
         this.y = y;
         this.maxSize = maxSize;
@@ -34,21 +34,31 @@ public class CarRepairShop<C extends Car> {
     }
 
     /** Adds a car to the Car Repair Shop.
-     * You can only add new cars to the repair shop if the maxSize isn't reached yet,
-     * ie you can't add car if the shop is full.
-     *
-     * @param item a Car
+     * You can only add new cars to the repair shop if:
+     * the maxSize isn't reached yet (you can't add car if the shop is full.)
+     * the car is stationary,
+     * and the car is reasonably close to car
+     * @param car a Car
      */
-    public void loadCar(C item){
-        carLoader.loadCar(item);
+    public void loadCar(Car car){
+        if(maxSize > cars.size()) {
+            if (canLoadCar(car) && isCarStationary(car)) {
+                cars.add(car);
+            }
+        }
     }
 
-    /** Removes a car from the Car Repair Shop
+    /**
+     * Unloads a car from the carTransporter's ramp
+     * Cars can only be unloaded if: the carTransporter is stationary
+     * ramp is down, and the cars are reasonably close to CarTransporter.
      *
-     * @param item a car
      */
-    public void unloadCar(C item){
-        carLoader.loadCar(item);
+    public void unloadCar() {
+        if (canUnloadCar()) {
+            cars.get(lastLoadedIndex()).setX(getX() + 5);
+            cars.remove(lastLoadedIndex());
+        }
     }
 
     /** Checks if car is close enough to CarTransporter for pickup.
@@ -57,7 +67,8 @@ public class CarRepairShop<C extends Car> {
      * @return boolean true if the car is close enough, otherwise false.
      */
     public boolean isCarCloseEnough(Car c) {
-        return carLoader.isCarCloseEnough(c);
+        return (getX() - 5 < c.getX() && c.getX() < getX() + 5)
+                && (getY() - 5 < c.getY() && c.getY() < getY() + 5);
     }
 
     /** Determines whether a car is in motion;
@@ -65,7 +76,7 @@ public class CarRepairShop<C extends Car> {
      * otherwise returns false
      */
     public boolean isCarStationary(Car car) {
-        return carLoader.isCarStationary(car);
+        return car.getCurrentSpeed() == 0;
     }
 
     /**
@@ -73,7 +84,7 @@ public class CarRepairShop<C extends Car> {
      * @return the list of cars currently in car repair shop.
      */
     public List<Car> getCars() {
-        return carLoader.getCars();
+        return cars;
     }
 
     /** Returns the index of the last car added into the list cars.
@@ -81,7 +92,7 @@ public class CarRepairShop<C extends Car> {
      * @return index of the car last loaded
      */
     public int lastLoadedIndex() {
-        return carLoader.lastLoadedIndex();
+        return cars.size() - 1;
     }
 
     /**
@@ -91,7 +102,10 @@ public class CarRepairShop<C extends Car> {
      * @return a boolean that's true if car can be loaded, otherwise false
      */
     public boolean canLoadCar(Car car) {
-        return carLoader.canLoadCar(car);
+        if(maxSize > cars.size()) {
+            return canLoadOrUnloadCar() && isCarCloseEnough(car);
+        }
+        return false;
     }
 
     //CarTransporter can't load itself since it doesn't extend car(it extends vehicle).
@@ -101,7 +115,20 @@ public class CarRepairShop<C extends Car> {
      * @return boolean that is true if cartransporter can unload car, otherwise false.
      */
     public boolean canUnloadCar() {
-        return carLoader.canUnloadCar();
+        return !cars.isEmpty() && canLoadOrUnloadCar();
+
+    }
+
+    /**
+     * Checks if a car can interact with CarTransporter, ie if CarTransporter is stationary, car is close enough and ramp is down
+     *
+     * @return boolean representing true if car can be loaded/removed, otherwise false
+     */
+    public boolean canLoadOrUnloadCar() {
+        if (ramp.isStationary()) {
+            return !ramp.isRampRaised();
+        }
+        return false;
     }
 
     /**
@@ -110,19 +137,19 @@ public class CarRepairShop<C extends Car> {
      * @return the names of the cars as a string.
      */
     public String carsToString() {
-        return carLoader.carsToString();
+        if(cars.isEmpty()) {
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[");
+        for(int i = 0; i<cars.size() -1; i++) {
+            sb.append(cars.get(i).getModelName());
+            sb.append(", ");
+        }
+        sb.append(cars.get(cars.size() -1).getModelName());
+        sb.append("]");
+        return sb.toString();
     }
 
-    public static void main(String[] args) {
-        Saab95 saab95 = new Saab95(4, 100,0, Color.black, "Saab95");
-        Volvo240 volvo240 = new Volvo240(4, 100,0, Color.black, "Volvo240");
-        CarRepairShop<Saab95> saab95RepairShop = new CarRepairShop<>(0,0,2);
-
-        saab95RepairShop.loadCar(saab95);
-        //saab95RepairShop.loadCar(volvo240);
-
-        CarRepairShop<Car> anyCarRepairShop = new CarRepairShop<>(0,0,2);
-        anyCarRepairShop.loadCar(saab95);
-        anyCarRepairShop.loadCar(volvo240);
-    }
 }

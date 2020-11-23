@@ -38,8 +38,6 @@ public abstract class Vehicle implements Movable{
         this.directionAngle = directionAngle;
     }
 
-
-
     /**
      * Get the number of doors
      * @return the number of doors
@@ -123,7 +121,6 @@ public abstract class Vehicle implements Movable{
         this.modelName = modelName;
     }
 
-
     /**
      * Start the engine
      */
@@ -146,7 +143,6 @@ public abstract class Vehicle implements Movable{
         return x;
     }
 
-
     /**
      * Get the Y coordinate (For testing purposes)
      * @return the Y coordinate of the vehicle
@@ -155,10 +151,18 @@ public abstract class Vehicle implements Movable{
         return y;
     }
 
+    /** Sets Vehicle's x coordinate
+     *
+     * @param x the new x coordinate
+     */
     public void setX(double x) {
         this.x = x;
     }
 
+    /** Sets Vehicle's y coordinate
+     *
+     * @param y the new y coordinate
+     */
     public void setY(double y) {
         this.y = y;
     }
@@ -215,7 +219,6 @@ public abstract class Vehicle implements Movable{
      * Helper method for testing purposes.
      * @return x and y coordinates, as well as currentSpeed in string format.
      */
-
     @Override
     public String toString(){
         return "( x: " + getX() + ", y: "  + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
@@ -226,7 +229,6 @@ public abstract class Vehicle implements Movable{
      * But because the method name is the same we create an abstract method
      * which then Saab95 and Volvo inherit and override
      */
-
     public abstract double speedFactor();
 
     /** Increases the vehicle's currentSpeed.
