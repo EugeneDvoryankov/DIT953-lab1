@@ -27,6 +27,7 @@ public class Scania extends Truck{
      * Changes the state of the ramp to raised.
      */
     private void raiseRamp() {
+
         ramp.raiseRamp();
     }
 
