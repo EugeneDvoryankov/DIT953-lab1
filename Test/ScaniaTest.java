@@ -19,38 +19,38 @@ class ScaniaTest {
 
     @Test
     void raisePlatformAngle() {
-        scania.raisePlatformAngle(80);
+        scania.raiseRamp(80);
         assertEquals(70, scania.getPlatformAngle());
     }
 
     @Test
     void lowerPlatformAngle() {
         scania.setPlatformAngle(45);
-        scania.lowerPlatformAngle(50);
+        scania.lowerRamp(50);
         assertEquals(0, scania.getPlatformAngle());
     }
 
     @Test
     void canRaisePlatformAngle() {
-        assertTrue(scania.canRaisePlatformAngle());
+        assertTrue(scania.isStationary());
     }
 
     @Test
     void canNotRaisePlatformAngle() {
         scania.gas(1);
-        assertFalse(scania.canRaisePlatformAngle());
+        assertFalse(scania.isStationary());
     }
 
     @Test
     void isPlatformRaisedFalse() {
         scania.setPlatformAngle(0);
-        assertFalse(scania.isPlatformRaised());
+        assertFalse(scania.isRampRaised());
     }
 
     @Test
     void isPlatformRaisedTrue() {
         scania.setPlatformAngle(45);
-        assertTrue(scania.isPlatformRaised());
+        assertTrue(scania.isRampRaised());
     }
 
     @Test
@@ -68,7 +68,7 @@ class ScaniaTest {
     @Test
     void shouldNotGas() {
         Scania scania = new Scania(2,350,0, Color.green,"Scania" );
-        scania.raisePlatformAngle(45);
+        scania.raiseRamp(45);
         scania.gas(1);
         assertEquals(0, scania.getCurrentSpeed());
     }
